@@ -1,0 +1,43 @@
+Name: expat
+Summary: An XML parser library
+Version: 2.1.0
+Release: 1
+Group: System/Libraries
+License: MIT
+URL: http://www.libexpat.org/
+Sources:
+    - http://download.sourceforge.net/expat/expat-%{version}.tar.gz
+Description: |
+    This is expat, the C library for parsing XML, written by James Clark. Expat
+    is a stream oriented XML parser. This means that you register handlers with
+    the parser prior to starting the parse. These handlers are called when the
+    parser discovers the associated structures in the document being parsed. A
+    start tag is an example of the kind of structures for which you may
+    register handlers.
+
+PkgBR:
+    - autoconf
+    - automake
+    - libtool
+Configure: configure
+ConfigOptions:
+    - --libdir=/%{_libdir}
+Builder: make
+Check: yes
+SubPackages:
+    - Name: doc
+      Summary: Documentation for the expat package
+      Group: Development/Documentation
+      Description: Documentation for the expat package.
+      Requires:
+          - expat = %{version}-%{release}
+
+    - Name: devel
+      Summary: Libraries and header files to develop applications using expat
+      Group: Development/Libraries
+      Description: |
+          The expat-devel package contains the libraries, include files and documentation
+          to develop XML applications with expat.
+      Requires:
+          - expat = %{version}-%{release}
+

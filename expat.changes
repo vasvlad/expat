@@ -1,3 +1,8 @@
+* Thu Apr 05 2012 Marko Saukko <sage@merproject.org> - 2.1.0
+- Fixes MER#243: CVE-2012-0876. upgrade to Expat 2.1.0
+- Added .yaml for spectacle.
+- Dropped patches not used or upstreamed.
+
 * Wed Dec 23 2009 Anas Nashif <anas.nashif@intel.com> - 2.0.1
 - fixed some lint errors
 - applied patch to be able to run make check
