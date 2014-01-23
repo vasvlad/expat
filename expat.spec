@@ -14,6 +14,7 @@ License:    MIT
 URL:        http://www.libexpat.org/
 Source0:    http://download.sourceforge.net/expat/expat-%{version}.tar.gz
 Source100:  expat.yaml
+Patch0:     expat-aarch64.patch
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 BuildRequires:  autoconf
@@ -54,7 +55,7 @@ to develop XML applications with expat.
 
 %prep
 %setup -q -n %{name}-%{version}
-
+%patch0 -p1
 # >> setup
 # << setup
 
