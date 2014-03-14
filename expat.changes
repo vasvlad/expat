@@ -1,3 +1,6 @@
+* Thu Jan 23 2014 Oleg Girko <oleg.girko@jolla.com> - 2.1.0  
+- Add aarch64 support.
+
 * Thu Apr 05 2012 Marko Saukko <sage@merproject.org> - 2.1.0
 - Fixes MER#243: CVE-2012-0876. upgrade to Expat 2.1.0
 - Added .yaml for spectacle.
