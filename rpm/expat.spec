@@ -1,8 +1,8 @@
-%global unversion 2_2_7
+%global unversion 2_2_9
 
 Summary: An XML parser library
 Name: expat
-Version: 2.2.7
+Version: 2.2.9
 Release: 1
 Source0: %{name}-%{version}.tar.gz
 URL: https://libexpat.github.io/
