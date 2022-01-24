@@ -2,7 +2,7 @@
 
 Summary: An XML parser library
 Name: expat
-Version: 2.2.9
+Version: 2.4.3
 Release: 1
 Source0: %{name}-%{version}.tar.gz
 URL: https://libexpat.github.io/
@@ -19,7 +19,6 @@ register handlers.
 
 %package doc
 Summary:    Documentation for the expat package
-Group:      Development/Documentation
 Requires:   %{name} = %{version}-%{release}
 Requires:   expat = %{version}-%{release}
 
@@ -35,21 +34,25 @@ The expat-devel package contains the libraries, include files and documentation
 to develop XML applications with expat.
 
 %prep
-%setup -q -n expat-%{version}/upstream/expat
+%autosetup -p1 -n %{name}-%{version}/upstream
+
+%build
+cd expat
 sed -i 's/install-data-hook/do-nothing-please/' lib/Makefile.am
 ./buildconf.sh
 
-%build
 export CFLAGS="$RPM_OPT_FLAGS -fPIC"
 %configure --without-docbook --disable-static
 make %{?_smp_mflags}
 
 %install
+cd expat
 make install DESTDIR=$RPM_BUILD_ROOT
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 
 %check
+cd expat
 make check
 
 %post -p /sbin/ldconfig
@@ -58,17 +61,18 @@ make check
 
 
 %files
-%license COPYING
+%license expat/COPYING
 %{_bindir}/*
 %{_libdir}/lib*.so.*
 
 %files doc
 %defattr(-,root,root,-)
-%doc doc/reference.html doc/*.png doc/*.css examples/*.c
+%doc expat/doc/reference.html expat/doc/*.png expat/doc/*.css expat/examples/*.c
 %doc %{_datadir}/doc/expat/AUTHORS
 %doc %{_datadir}/doc/expat/Changes
 
 %files devel
 %{_libdir}/lib*.so
 %{_libdir}/pkgconfig/*.pc
+%{_libdir}/cmake/expat-*
 %{_includedir}/*.h
