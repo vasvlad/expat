@@ -1,8 +1,6 @@
-%global unversion 2_2_9
-
 Summary: An XML parser library
 Name: expat
-Version: 2.4.3
+Version: 2.6.1
 Release: 1
 Source0: %{name}-%{version}.tar.gz
 URL: https://libexpat.github.io/
@@ -34,40 +32,36 @@ The expat-devel package contains the libraries, include files and documentation
 to develop XML applications with expat.
 
 %prep
-%autosetup -p1 -n %{name}-%{version}/upstream
+%autosetup -p1 -n %{name}-%{version}/upstream/expat
 
 %build
-cd expat
 sed -i 's/install-data-hook/do-nothing-please/' lib/Makefile.am
 ./buildconf.sh
 
 export CFLAGS="$RPM_OPT_FLAGS -fPIC"
 %configure --without-docbook --disable-static
-make %{?_smp_mflags}
+%make_build
 
 %install
-cd expat
-make install DESTDIR=$RPM_BUILD_ROOT
+%make_install
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 
 %check
-cd expat
 make check
 
 %post -p /sbin/ldconfig
 
 %postun -p /sbin/ldconfig
 
-
 %files
-%license expat/COPYING
+%license COPYING
 %{_bindir}/*
 %{_libdir}/lib*.so.*
 
 %files doc
 %defattr(-,root,root,-)
-%doc expat/doc/reference.html expat/doc/*.png expat/doc/*.css expat/examples/*.c
+%doc doc/reference.html doc/*.css examples/*.c
 %doc %{_datadir}/doc/expat/AUTHORS
 %doc %{_datadir}/doc/expat/Changes
 
