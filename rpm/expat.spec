@@ -1,9 +1,9 @@
 Summary: An XML parser library
 Name: expat
-Version: 2.6.1
+Version: 2.7.1
 Release: 1
 Source0: %{name}-%{version}.tar.gz
-URL: https://libexpat.github.io/
+URL: https://github.com/sailfishos/expat/
 License: MIT
 BuildRequires: autoconf, libtool
 
@@ -60,7 +60,6 @@ make check
 %{_libdir}/lib*.so.*
 
 %files doc
-%defattr(-,root,root,-)
 %doc doc/reference.html doc/*.css examples/*.c
 %doc %{_datadir}/doc/expat/AUTHORS
 %doc %{_datadir}/doc/expat/Changes
