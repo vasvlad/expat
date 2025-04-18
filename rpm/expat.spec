@@ -1,9 +1,10 @@
+%define keepstatic 1
 Summary: An XML parser library
 Name: expat
-Version: 2.7.1
+Version: 2.6.1
 Release: 1
 Source0: %{name}-%{version}.tar.gz
-URL: https://github.com/sailfishos/expat/
+URL: https://libexpat.github.io/
 License: MIT
 BuildRequires: autoconf, libtool
 
@@ -31,6 +32,13 @@ Requires: expat%{?_isa} = %{version}-%{release}
 The expat-devel package contains the libraries, include files and documentation
 to develop XML applications with expat.
 
+%package devel-static
+Summary: Libraries and header files to develop applications using expat
+
+%description devel-static
+The expat-devel package contains the libraries, include files and documentation
+to develop XML applications with expat.
+
 %prep
 %autosetup -p1 -n %{name}-%{version}/upstream/expat
 
@@ -39,7 +47,7 @@ sed -i 's/install-data-hook/do-nothing-please/' lib/Makefile.am
 ./buildconf.sh
 
 export CFLAGS="$RPM_OPT_FLAGS -fPIC"
-%configure --without-docbook --disable-static
+%configure --without-docbook --enable-static --without-tests
 %make_build
 
 %install
@@ -60,6 +68,7 @@ make check
 %{_libdir}/lib*.so.*
 
 %files doc
+%defattr(-,root,root,-)
 %doc doc/reference.html doc/*.css examples/*.c
 %doc %{_datadir}/doc/expat/AUTHORS
 %doc %{_datadir}/doc/expat/Changes
@@ -69,3 +78,6 @@ make check
 %{_libdir}/pkgconfig/*.pc
 %{_libdir}/cmake/expat-*
 %{_includedir}/*.h
+
+%files devel-static
+%{_libdir}/*.a
